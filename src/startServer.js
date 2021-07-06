@@ -8,7 +8,8 @@ function startServer({ typeDefs, resolvers }) {
   })
 
   const pubsub = new PubSub();
-  const server = new ApolloServer({ typeDefs, resolvers, context: { pubsub } });
+  const showPlayground = process.env.PRODUCTION === 'true' ? false : true;
+  const server = new ApolloServer({ typeDefs, resolvers, context: { pubsub }, playground: showPlayground});
   server.listen().then(({ url }) => console.log(`Server started at ${url}`))
 }
 
